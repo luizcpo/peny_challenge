@@ -25,11 +25,9 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: "Task was successfully created." }
-        format.json { render :show, status: :created, location: @task }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,6 +63,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.expect(task: [ :title, :description ])
+      params.expect(task: [ :title, :description, :done ])
     end
 end

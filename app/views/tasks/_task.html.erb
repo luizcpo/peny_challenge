@@ -1,12 +1,8 @@
 <div id="<%= dom_id task %>">
-  <p>
-    <strong>Title:</strong>
-    <%= task.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= task.description %>
-  </p>
-
+  <%= form_with model: task, data: { controller: "remote-submission" } do |form| %>
+    <%= form.check_box :done, data: { action: "remote-submission#submit" } %>
+    <%= form.submit %>
+  <% end %>
+  <%= task.title %> - <%= task.description %>
+  <%= button_to image_tag("/images/trash.svg"), task, method: :delete %>
 </div>
